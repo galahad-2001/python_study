@@ -12,15 +12,23 @@ hds = [{'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.
 url = 'https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4'
 req = urllib2.Request(url)
 source_code = urllib2.urlopen(req).read()
-plain_text = str(source_code)
-soup = BeautifulSoup(plain_text, "html.parser")
-list_soup = soup.find('ul', {'class': 'subject-list'})
-list_soup_books = soup.findAll('li', {'class': 'subject-item'})
+soup = BeautifulSoup(source_code, "html.parser")
+subject_list = soup.find('ul', {'class': 'subject-list'})
+subject_items = subject_list.findAll('li', {'class': 'subject-item'})
 
-for list_soup_book in list_soup_books:
-    info = list_soup_book.find('div', {'class': 'info'})
-    pub = list_soup_book.find('div', {'class': 'pub'})
-    print info
-    print '*' * 50
+for subject_item in subject_items:
+    title = subject_item.find('div', {'class': 'info'}).a.get_text().strip().replace(' ', '').replace('\n', '')
+    print title
+    # print '*' * 60
+    pub = subject_item.find('div', {'class': 'pub'}).get_text().strip()
     print pub
-    print '*' * 150
+    # print '*' * 60
+    rating_nums = subject_item.find('span', {'class': 'rating_nums'}).get_text().strip()
+    print rating_nums
+    # print '*' * 60
+    pl = subject_item.find('span', {'class': 'pl'}).get_text().strip()
+    print pl
+    # print '*' * 60
+    p = subject_item.p.get_text().strip().replace('\n', '')
+    print p
+    print '*' * 180
