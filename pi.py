@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
+
 import random
 import matplotlib.pyplot as plt
 
 i = 0
 k = float(0)
-l = float(1000000000)
+l = float(10000000)
 r = float(0.5)
 xx = []
 yy = []
@@ -19,5 +21,5 @@ while i < l:
 	i += 1
 
 print k/(l*r**2)
-plot = plt.plot(xx, yy, '*')
+plot = plt.plot(xx, yy, 'b,')
 plt.show()
