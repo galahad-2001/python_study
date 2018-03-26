@@ -14,7 +14,7 @@ def get_source_code(url):
     source_code = urllib2.urlopen(req).read()
     return source_code
 
-def get subject_items(source_code):
+def get_subject_items(source_code):
     soup = BeautifulSoup(source_code, "html.parser")
     subject_list = soup.find('ul', {'class': 'subject-list'})
     subject_items = subject_list.findAll('li', {'class': 'subject-item'})
@@ -27,16 +27,16 @@ def print_subject_items(subject_items):
         rating_nums = subject_item.find('span', {'class': 'rating_nums'}).get_text().strip()
         pl = subject_item.find('span', {'class': 'pl'}).get_text().strip()
         p = subject_item.p.get_text().strip().replace('\n', '')
-        print title
-        print pub
-        print rating_nums
-        print pl
-        print p
-        print '*' * 150
+        # print title
+        # print pub
+        # print rating_nums
+        # print pl
+        # print p
+        # print '*' * 150
 
 i = 0
 while i <= 41:
     url = 'https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start=' + str(i) + '&type=T'
     # print url
-    print_subject_items(get_subject_items(url))
+    print_subject_items(get_subject_items(get_source_code(url)))
     i += 20
