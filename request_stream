@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+
+import urllib2
+
+password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
+top_level_url = "http://192.168.77.143/"
+password_mgr.add_password(None, top_level_url, "root", "pass")
+handler = urllib2.HTTPDigestAuthHandler(password_mgr)
+proxy_handler = urllib2.ProxyHandler({})
+opener = urllib2.build_opener(handler, proxy_handler)
+urllib2.install_opener(opener)
+url = 'http://192.168.77.143/axis-cgi/mjpg/video.cgi'
+req = urllib2.Request(url)
+response = urllib2.urlopen(req)
