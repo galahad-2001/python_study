@@ -4,14 +4,11 @@ import paramiko
 
 # 执行命令
 def buffer():
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/buffer/enable')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/buffer/enable')
     buffer_enable = stdout.read().strip()
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/buffer/length')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/buffer/length')
     buffer_length = stdout.read().strip()
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/buffer/watermark')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/buffer/watermark')
     buffer_watermark = stdout.read().strip()
 
     print '*' * 50
@@ -21,8 +18,7 @@ def buffer():
 
 
 def chipinfo():
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/chipinfo')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/chipinfo')
     chipinfo = stdout.read().strip()
 
     print '*' * 50
@@ -30,29 +26,21 @@ def chipinfo():
 
 
 def in_accel():
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/chipinfo')
-    chipinfo = stdout.read()
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_accel_scale')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_accel_scale')
     in_accel_scale = float(stdout.read())
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_accel_x_raw')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_accel_x_raw')
     in_accel_x_raw = float(stdout.read())
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_accel_y_raw')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_accel_y_raw')
     in_accel_y_raw = float(stdout.read())
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_accel_z_raw')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_accel_z_raw')
     in_accel_z_raw = float(stdout.read())
-
     in_accel_x = in_accel_scale * in_accel_x_raw
     in_accel_y = in_accel_scale * in_accel_y_raw
     in_accel_z = in_accel_scale * in_accel_z_raw
     in_accel = (in_accel_x ** 2 + in_accel_y ** 2 + in_accel_z ** 2) ** 0.5
 
     print '*' * 50
-    print "in_accel_scale = " + str(in_accel_scale)
+    print "in_accel_scale = " + str(   in_accel_scale)
     print "in_accel_x_raw = " + str(in_accel_x_raw)
     print "in_accel_y_raw = " + str(in_accel_y_raw)
     print "in_accel_z_raw = " + str(in_accel_z_raw)
@@ -63,17 +51,19 @@ def in_accel():
 
 
 def in_anglvel():
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_scale')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_scale')
     in_anglvel_scale = float(stdout.read())
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_x_raw')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_x_raw')
     in_anglvel_x_raw = float(stdout.read())
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_y_raw')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_y_raw')
     in_anglvel_y_raw = float(stdout.read())
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_z_raw')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_z_raw')
+    in_anglvel_z_raw = float(stdout.read())
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_x_raw')
+    in_anglvel_x_raw = float(stdout.read())
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_y_raw')
+    in_anglvel_y_raw = float(stdout.read())
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_anglvel_z_raw')
     in_anglvel_z_raw = float(stdout.read())
 
     in_anglvel_x = in_anglvel_scale * in_anglvel_x_raw
@@ -91,11 +81,9 @@ def in_anglvel():
 
 
 def in_temp():
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_temp_scale')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_temp_scale')
     in_temp_scale = float(stdout.read())
-    stdin, stdout, stderr = ssh.exec_command(
-        'cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_temp_raw')
+    stdin, stdout, stderr = ssh.exec_command('cat /sys/devices/platform/e0000000.ahb/e0020000.spi/spi_master/spi0/spi0.0/iio:device0/in_temp_raw')
     in_temp_raw = float(stdout.read())
 
     in_temp = in_temp_scale * in_temp_raw
@@ -112,14 +100,12 @@ if __name__ == "__main__":
     # 允许连接不在know_hosts文件中的主机
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     # 连接服务器
-    ssh.connect(hostname='192.168.77.221', port=22,
-                username='root', password='pass')
+    ssh.connect(hostname='192.168.77.151', port=22, username='root', password='pass')
 
     buffer()
     chipinfo()
     in_accel()
     in_anglvel()
     in_temp()
-
 
     ssh.close()
