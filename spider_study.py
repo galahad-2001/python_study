@@ -31,6 +31,12 @@ def get_list_subject_items(subject_items):
         rating_nums = subject_item.find('span', {'class': 'rating_nums'}).get_text().strip()
         pl = subject_item.find('span', {'class': 'pl'}).get_text().strip().strip('(').strip(u'人评价)')
         p = subject_item.p.get_text().strip().replace('\n', '')
+        print title
+        print pub
+        print rating_nums
+        print pl
+        print p
+        print '*' * 50
         list_subject_items.append([title, pub, rating_nums, rating_nums, p])
     return list_subject_items
 

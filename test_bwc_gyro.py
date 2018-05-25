@@ -100,7 +100,7 @@ if __name__ == "__main__":
     # 允许连接不在know_hosts文件中的主机
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     # 连接服务器
-    ssh.connect(hostname='192.168.77.151', port=22, username='root', password='pass')
+    ssh.connect(hostname='192.168.77.191', port=22, username='root', password='pass')
 
     buffer()
     chipinfo()
