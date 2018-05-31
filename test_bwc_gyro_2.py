@@ -11,7 +11,7 @@ import time
 
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh.connect("192.168.77.191", 22, "root", "pass")
+ssh.connect("192.168.77.136", 22, "root", "pass")
 
 time.strftime("%Y%m%d_%H%M%S", time.localtime())
 
