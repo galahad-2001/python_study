@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import urllib2
@@ -8,14 +9,17 @@ import sys
 import xlwt
 
 
-if __name__ == '__main__':
+def spider_cst_read_only():
+    '''
+    This is a spider for fetching cst tickets which region belong to China
+    '''
 
     reload(sys)
     sys.setdefaultencoding('utf-8')
 
     password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
     top_level_url = "https://cst.axis.com/"
-    password_mgr.add_password(None, top_level_url, "jayden", "Wangwenyan2017")
+    password_mgr.add_password(None, top_level_url, "username", "password")
     # handler = urllib2.HTTPDigestAuthHandler(password_mgr)
     handler = urllib2.HTTPBasicAuthHandler(password_mgr)
     opener = urllib2.build_opener(handler)
@@ -55,9 +59,9 @@ if __name__ == '__main__':
             Description = subject_items[2].get_text().strip()
             Product = subject_items[3].get_text().strip()
             Customer = subject_items[4].span.get_text().strip()
-            CustomerCompany = subject_items[4].get_text().strip().strip(Customer)
+            CustomerCompany = subject_items[4].get_text().strip()[len(Customer):] # New method to get CustomerCompany
             State = subject_items[5].span.get_text().strip()
-            StateInfo = subject_items[5].get_text().strip().strip(State)
+            StateInfo = subject_items[5].get_text().strip().lstrip(State).strip('@')
             Age = subject_items[6].get_text().strip().strip(' days').strip(' day')
             Waited = subject_items[7].get_text().strip().strip(' days').strip(' day')
             text_list = [Ticket_ID, Description, Product, Customer, CustomerCompany, State, StateInfo, Age, Waited]
@@ -71,6 +75,11 @@ if __name__ == '__main__':
             print '%d results found!' % count
             break
 
+        # break # for test
         page += 1
 
-    wb.save('CST_Spider_%s.xls' % (time.strftime("%Y%m%d_%H%M%S", time.localtime())))
+    wb.save('../spider_results/CST_Spider_%s.xls' % (time.strftime("%Y%m%d_%H%M%S", time.localtime())))
+
+
+if __name__ == '__main__':
+    spider_cst_read_only()
